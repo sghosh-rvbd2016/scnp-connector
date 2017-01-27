@@ -23,14 +23,15 @@ SSL credentials: /etc/npm/flowlogging/ssl
 
 ### Program Options
 
-Usage: /opt/npm/bin/flowlogging/scnp-connector --id --netprofiler <hostname> [OPTIONS]
+<pre>
+  Usage: /opt/npm/bin/flowlogging/scnp-connector --id --netprofiler <hostname> [OPTIONS]
 
- Required Arguments:
+  Required Arguments:
 
     --id <integer>		Set MNMP ID for this node.
     --netprofiler <hostname|IP>	NetProfiler to connect to.
 
-Optional Arguments:
+  Optional Arguments:
 
    --certificate <file>         SSL certificate to use for MNMP.
    --debug[,2,3]                Log debug messages, level 2/3 optional.
@@ -42,6 +43,7 @@ Optional Arguments:
    --syslog			Log messages to syslogd.
    --trusted-certs <dir>        Path to directory containing trusted certificates.
    --quiet			Only log errors.
+</pre>
 
 ### Example Usage
 
@@ -58,6 +60,7 @@ the machines primary MAC address plus an offset will be ideal.
 
 ### Example Output
 
+<pre>
 Jan 22 12:11:27 netprofiler scnp-connector[20151]: Established TLSv1.2 connection (4->10.10.10.10:41017): cipher name: AES256-SHA version: TLSv1/SSLv3 bits: 256
 Jan 22 12:11:27 netprofiler scnp-connector[20151]: Succesfully bound to 0.0.0.0:2055
 Jan 22 12:11:27 netprofiler scnp-connector[20151]: Welcome message from cascade-express (4141216738836481) type mazu
@@ -68,3 +71,4 @@ Jan 22 12:15:00 netprofiler scnp-connector[20151]: slice 1485548040: relayed 131
 Jan 22 12:16:00 netprofiler scnp-connector[20151]: slice 1485548100: relayed 1403 datagrams (input 1403, maxq in 39/1000 out 3/1000)
 Jan 22 12:17:00 netprofiler scnp-connector[20151]: slice 1485548160: relayed 1540 datagrams (input 1540, maxq in 31/1000 out 3/1000)
 Jan 22 12:18:00 netprofiler scnp-connector[20151]: slice 1485548220: relayed 1543 datagrams (input 1543, maxq in 32/1000 out 3/1000)
+</pre>
