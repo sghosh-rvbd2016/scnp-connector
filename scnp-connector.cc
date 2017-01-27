@@ -10,6 +10,7 @@ NodeID		MNMP_ID			= 0;
 unsigned 	MNMP_SSL_PORT		= 41017;
 std::string	MNMP_SERVER		= "";
 int		MNMP_COMPRESSION	= MNMPMessage::COMPRESSION_LZ4;
+std::string	SYSLOG_NAME		= "";
 std::string	SSL_CERTIFICATE		= "/etc/npm/flowlogging/ssl/mnmp.pem";
 std::string	SSL_TRUSTED_DIR		= "/etc/npm/flowlogging/ssl";
 std::string	NETFLOW_ADDR            = "127.0.0.1";
@@ -119,8 +120,13 @@ int main(int argc, char ** argv)
       NETFLOW_PORT = atoi(argv[++idx]);
       DEBUGF("relaying netflow from port %u", NETFLOW_PORT);
     } else if (arg == "--syslog") {
-      DEBUGF("enabling syslog");
-      Logging::enable_syslog(argv[0]);
+      std::ostringstream sa;
+      std::string path = argv[0];
+      sa << path.substr(path.find_last_of("/\\") + 1) 
+         << "[" << ::getpid() << "]";
+      SYSLOG_NAME = sa.str();
+      DEBUGF("enabling syslog, %s", SYSLOG_NAME.c_str());
+      Logging::enable_syslog(SYSLOG_NAME.c_str());
     } else if (arg == "--debug") {
       Logging::level = Logging::LEVEL_DEBUG;
     } else if (arg == "--debug2") {
