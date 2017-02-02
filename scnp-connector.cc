@@ -69,15 +69,16 @@ Required Arguments:\n\
 \n\
    --id <integer>		Set MNMP ID for this node.\n\
    --netprofiler <hostname|IP>	NetProfiler to connect to.\n\
+   --netflow-relay              Connect and relay NetFlow records to NetProfiler.\n\
 \n\
 Optional Arguments:\n\
 \n\
    --certificate <file>         SSL certificate to use for MNMP.\n\
-   --debug[,2,3]                Log debug messages, level 2/3 optional.\n\
+   --debug[n]                   Log debug messages, level 2 or 3 is optional.\n\
    --help                       Show this message.\n\
+   --mnmp-port                  Specify MNMP port of server, default is 41017.\n\
    --netflow-addr               IPv4 address to accept Netflow on.\n\
    --netflow-port               UDP port to accept Netflow on.\n\
-   --netflow-relay              Connect and relay NetFlow records to NetProfiler.\n\
    --no-compression             Do not compress flow messages.\n\
    --syslog			Log messages to syslogd.\n\
    --trusted-certs <dir>        Path to directory containing trusted certificates.\n\
@@ -110,6 +111,9 @@ int main(int argc, char ** argv)
     } else if (arg == "--trusted-certs") {
       SSL_TRUSTED_DIR = argv[++idx];
       DEBUGF("SSL trusted certificate directory is %s", SSL_CERTIFICATE.c_str());
+    } else if (arg == "--mnmp-port") {
+      MNMP_SSL_PORT = atoi(argv[++idx]);
+      DEBUGF("using port %u for MNMP connection", MNMP_SSL_PORT);
     } else if (arg == "--netflow-relay") {
       do_netflow_relay = true;
       DEBUGF("relaying netflow task enabled");

@@ -281,6 +281,7 @@ MNMPMessage::type_string() const
   case MN_ENDSLICE_MESSAGE:       return "MN_ENDSLICE_MESSAGE";
   case MN_FLOWS_MESSAGE:          return "MN_FLOWS_MESSAGE";
   case MN_NETFLOW_FLOW_MESSAGE:   return "MN_NETFLOW_FLOW_MESSAGE";
+  case MN_RAW_NETFLOW_FLOW_MESSAGE:   return "MN_RAW_NETFLOW_FLOW_MESSAGE";
   case MN_FLOW_MAPPINGS_MESSAGE:  return "MN_FLOW_MAPPINGS_MESSAGE";
   case MN_ANOMALY_MESSAGE:        return "MN_ANOMALY_MESSAGE";
   case MN_SERVER_PORT_MESSAGE:    return "MN_SERVER_PORT_MESSAGE";
@@ -648,7 +649,7 @@ hex_s(const void *b, size_t len)
 }
 
 NetflowFlowsMessage::NetflowFlowsMessage(NodeID src, NodeID dst)
-  : MNMPMessage(MN_NETFLOW_FLOW_MESSAGE, src, dst)
+  : MNMPMessage(MN_RAW_NETFLOW_FLOW_MESSAGE, src, dst)
 {
 }
 
